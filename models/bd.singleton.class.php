@@ -63,7 +63,7 @@ class CBaseDatos //Tipo Singleton
             $this->_oLinkId = $oMysqlConnect;
 
             //VERIFICAMOS QUE EXISTA LA BASE DE DATOS EN EL MOTOR
-            $bExisteBD  =  mysqli_select_db($oMysqlConnect, 'clubprogramacion');
+            $bExisteBD  =  mysqli_select_db($oMysqlConnect, 'tareas-lenpro3');
             //si no se pudo encontrar esa BD lanza un error
             if (!$bExisteBD) {
                 //Lanza la excepcion y se sale del procedimiento
