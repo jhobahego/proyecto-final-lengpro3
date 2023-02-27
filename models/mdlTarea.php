@@ -7,6 +7,7 @@
     private $id;
     private $titulo;
     private $descripcion;
+    private $estado;
 
     private $conexion;
 
@@ -26,6 +27,10 @@
       return $this->descripcion;
     }
 
+    public function getEstado(){
+      return $this->estado;
+    }
+
     public function setId($id){
       return $this->id = $id;
     }
@@ -38,8 +43,12 @@
       return $this->descripcion = $descripcion;
     }
 
+    public function setEstado($estado){
+      return $this->estado = $estado;
+    }
+
     public function guardar(){
-      $consulta = "INSERT INTO tarea(titulo,descripcion) VALUES('$this->titulo','$this->descripcion')";
+      $consulta = "INSERT INTO tarea(titulo,descripcion,estado) VALUES('$this->titulo','$this->descripcion','$false')";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
