@@ -12,10 +12,15 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Pagina de tareas</h1>
-    <p>Esta es una pagina de tareas creada como proyecto final del curso de lenguaje de programación 3 de la carrera de ingeniería en sistemas.
-    </p>
+  <div class="container-fluid">
+    <header>
+      <div class="container menuContainer"></div>
+    </header>
+    <main>
+      <h1>Pagina de tareas</h1>
+      <p>Esta es una pagina de tareas creada como proyecto final del curso de lenguaje de programación 3 de la carrera de ingeniería en sistemas.
+      </p>
+    </main>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -24,6 +29,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
     crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('.menuContainer').load('views/layouts/navbar.html');
+      });
+    </script>
 
 </body>
 
