@@ -46,7 +46,7 @@ class CBaseDatos //Tipo Singleton
             //oMysqlConnect es tipo resource si tiene exito y guarda un "link identifier"
             //algo como 5893, vamos un entero.
             //sino guarda un false (0)
-            $oMysqlConnect = mysqli_connect('127.0.0.1', 'root', '', 'clubprogramacion');
+            $oMysqlConnect = mysqli_connect('127.0.0.1', 'root', '', 'tareas-lenpro3');
 
             //si no es tipo resource es que no ha tenido exito la conexion;
             if (!$oMysqlConnect) {
