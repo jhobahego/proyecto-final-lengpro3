@@ -54,12 +54,12 @@
 
       if($this->conexion->get_link_id() != 0){
         if(mysqli_query($this->conexion->get_link_id(), $consulta)){
-          return true;
-        }else{
-          return false;
+          return ['status' => '200', 'message' => 'Guardado'];
+        } else {
+            return ['status' => '201', 'message' => 'Problemas con consulta'];
         }
       }else {
-        return false;
+        return ['status' => '500', 'message' => 'problemas en la conexion']
       }
     }
 
