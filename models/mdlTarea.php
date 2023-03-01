@@ -48,7 +48,7 @@
     }
 
     public function guardar(){
-      $consulta = "INSERT INTO tarea(titulo,descripcion,estado) VALUES('$this->titulo','$this->descripcion','$false')";
+      $consulta = "INSERT INTO tarea(titulo,descripcion) VALUES('$this->titulo','$this->descripcion')";
         $this->conexion = (CBaseDatos::get_instancia());
         $this->conexion->conectar();
   
