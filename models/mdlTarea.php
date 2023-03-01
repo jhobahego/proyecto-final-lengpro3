@@ -52,7 +52,7 @@
         $this->conexion = (CBaseDatos::get_instancia());
         $this->conexion->conectar();
   
-        if($this->conexion->get_link_id() != 0){
+        if($this->conexion->get_link_id()){
           if(mysqli_query($this->conexion->get_link_id(), $consulta)){
             return ['status' => '200', 'message' => 'Guardado'];
           } else {
