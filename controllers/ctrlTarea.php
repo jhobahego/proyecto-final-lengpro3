@@ -10,7 +10,7 @@
     if( isset( $_POST['titulo'] ) ){
         $objeto->setTitulo( $_POST['titulo'] );
     }
-    if( isset( $_POST['nombre'] ) ){
+    if( isset( $_POST['descripcion'] ) ){
         $objeto->setDescripcion( $_POST['descripcion'] );
     }
 
