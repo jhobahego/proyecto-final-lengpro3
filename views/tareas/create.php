@@ -53,6 +53,55 @@
       $('.menuContainer').load('../../../ProyectoFinalLenProIII/views/layouts/navbar.html');
     });
 
+  function validarDatos() {
+    let titulo = document.getElementById('titulo');
+    let descripcion = document.getElementById('descripcion');
+
+    titulo.value = titulo.value.trim();
+    descripcion.value = descripcion.value.trim();
+
+    if(titulo.value == 0){
+      alert('Se requiere ingresar un titulo');
+      titulo.focus();
+      return false;
+    }else if(descripcion.value == 0){
+      alert('Se requiere ingresar una descripcion');
+      descripcion.focus();
+      return false;
+    }
+
+    return true;
+  }
+
+  function guardarDatos() {
+    let datos = $("#formulario").serialize();
+    // console.log(datos);
+    $.ajax({
+        url: "../../controllers/ctrlTarea.php",
+        type: "POST",
+        data: datos + "&accion=guardar",
+
+        success: function (msj) {
+            alert("Mensaje:\n" + msj['message'] );
+        },
+
+        error: function (msj) {
+            alert("Mensaje:\n" + msj['message'] );
+        },
+        
+    });
+  }
+
+  function guardar() {
+    if(validarDatos()){
+      guardarDatos();
+    }
+  }  
+    
+  document.getElementById('guardar').addEventListener('click', function () {
+    guardar();
+  });
+    
   </script>
 </body>
 
