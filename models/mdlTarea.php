@@ -49,19 +49,18 @@
 
     public function guardar(){
       $consulta = "INSERT INTO tarea(titulo,descripcion,estado) VALUES('$this->titulo','$this->descripcion','$false')";
-      $this->conexion = (CBaseDatos::get_instancia());
-      $this->conexion->conectar();
-
-      if($this->conexion->get_link_id() != 0){
-        if(mysqli_query($this->conexion->get_link_id(), $consulta)){
-          return ['status' => '200', 'message' => 'Guardado'];
-        } else {
-            return ['status' => '201', 'message' => 'Problemas con consulta'];
+        $this->conexion = (CBaseDatos::get_instancia());
+        $this->conexion->conectar();
+  
+        if($this->conexion->get_link_id() != 0){
+          if(mysqli_query($this->conexion->get_link_id(), $consulta)){
+            return ['status' => '200', 'message' => 'Guardado'];
+          } else {
+              return ['status' => '201', 'message' => 'Problemas con consulta'];
+          }
+        }else {
+          return ['status' => '500', 'message' => 'problemas en la conexion'];
         }
-      }else {
-        return ['status' => '500', 'message' => 'problemas en la conexion']
-      }
     }
 
   }
-?>
