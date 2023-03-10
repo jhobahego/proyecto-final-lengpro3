@@ -8,6 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+  <base href="http://localhost/ProyectoFinalLenPro3/">
+
   <title>Tareas | Crear</title>
 </head>
 
@@ -32,7 +34,7 @@
                 </div>
               </div>
               <input type="button" id="guardar" class="btn btn-primary" value="Guardar"></input>
-              <a href="../../../ProyectoFinalLenProIII/views/tareas/index.html" class="btn btn-danger">cancelar</a>
+              <a href="views/tareas/index.html" class="btn btn-danger">cancelar</a>
             </form>
           </div>
         </div>
@@ -50,7 +52,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script>
     $(document).ready(function () {
-      $('.menuContainer').load('../../../ProyectoFinalLenProIII/views/layouts/navbar.html');
+      $('.menuContainer').load('views/layouts/navbar.html');
     });
 
   function validarDatos() {
@@ -77,7 +79,7 @@
     let datos = $("#formulario").serialize();
     // console.log(datos);
     $.ajax({
-        url: "../../controllers/ctrlTarea.php",
+        url: "controllers/ctrlTarea.php",
         type: "POST",
         data: datos + "&accion=guardar",
 
