@@ -10,6 +10,9 @@
 
   <base href="http://localhost/ProyectoFinalLenPro3/">
 
+  <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+
   <title>Tareas | Crear</title>
 </head>
 
@@ -63,12 +66,18 @@
     descripcion.value = descripcion.value.trim();
 
     if(titulo.value == 0){
-      alert('Se requiere ingresar un titulo');
       titulo.focus();
+      Swal.fire({
+        text: 'Se requiere ingresar un titulo',
+        icon: 'info'
+      })
       return false;
     }else if(descripcion.value == 0){
-      alert('Se requiere ingresar una descripcion');
       descripcion.focus();
+      Swal.fire({
+        text: 'Se requiere ingresar una descripción',
+        icon: 'info'
+      })
       return false;
     }
 
@@ -77,18 +86,23 @@
 
   function guardarDatos() {
     let datos = $("#formulario").serialize();
-    // console.log(datos);
     $.ajax({
         url: "controllers/ctrlTarea.php",
         type: "POST",
         data: datos + "&accion=guardar",
 
         success: function (msj) {
-            alert("Mensaje:\n" + msj['message'] );
+            Swal.fire({
+              text: msj['message'],
+              icon: msj['icon']
+            })
         },
 
         error: function (msj) {
-            alert("Mensaje:\n" + msj['message'] );
+          Swal.fire({
+              text: msj['message'],
+              icon: msj['icon']
+            })
         },
         
     });
