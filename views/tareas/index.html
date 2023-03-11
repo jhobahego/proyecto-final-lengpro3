@@ -10,6 +10,10 @@
 
   <base href="http://localhost/ProyectoFinalLenPro3/">
 
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <link rel="stylesheet" href="tablas/datatables.min.css">
+  <script src="tablas/datatables.min.js"></script>
+
   <title>Tareas</title>
 </head>
 
@@ -23,8 +27,8 @@
         <div class="card">
           <h5 class="card-header">Tareas</h5>
           <div class="card-body">
-            <a href="views/tareas/create.php" class="btn btn-primary">Crear</a>
-            <table class="table table-bordered mt-4">
+            <a href="views/tareas/create.php" class="btn btn-primary mb-4">Crear</a>
+            <table class="table table-bordered mt-4" id="tabla">
               <thead>
                 <tr>
                   <th>codigo</th>
@@ -60,10 +64,10 @@
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
     crossorigin="anonymous"></script>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script>
     $(document).ready(function () {
       $('.menuContainer').load('views/layouts/navbar.html');
+      $('#tabla').DataTable();
     });
   </script>
 
