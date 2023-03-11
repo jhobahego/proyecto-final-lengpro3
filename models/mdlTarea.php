@@ -79,4 +79,14 @@
       return $datos;
     }
 
+    public function consultar($id){
+      $consulta = "SELECT tarea_id, titulo, descripcion FROM tarea WHERE tarea_id=$id";
+      $this->conexion = (CBaseDatos::get_instancia());
+      $this->conexion->conectar();
+
+      $resultado = mysqli_query($this->conexion->get_link_id(), $consulta);
+      
+      return $resultado;
+    }
+
   }
