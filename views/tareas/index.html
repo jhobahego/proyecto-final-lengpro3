@@ -75,7 +75,7 @@
           for (var idx in msj){
             $('#tabla').DataTable().row.add([msj[idx].tarea_id, msj[idx].titulo, msj[idx].descripcion,
                '<button class="btn btn-info btn-sm" onclick="mostrar(' + msj[idx].tarea_id + ')" >Mostrar</button>' +
-                '<a class="btn btn-warning btn-sm" href="views/lenguajes/update.html?id=' + msj[idx].tarea_id + '" >Editar</a>' +
+                '<a class="btn btn-warning btn-sm" href="views/tareas/update.html?id=' + msj[idx].tarea_id + '" >Editar</a>' +
                 '<button class="btn btn-danger btn-sm" onclick="eliminar(' + msj[idx].tarea_id + ')" >Eliminar</button>']).draw();
           } 
         },
