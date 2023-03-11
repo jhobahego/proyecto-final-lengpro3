@@ -27,4 +27,20 @@
         header('Content-type: application/json');
         echo json_encode( $data );
     }
+
+    if( $_POST['accion'] == 'consultar' and isset( $_POST['id']) ){
+        $data = $objeto->consultar($_POST['id']);
+
+        $datos = array();
+        if( $data instanceof mysqli_result){
+            if($fila = mysqli_fetch_assoc($data)) {
+                $datos[] = $fila;
+            }
+        }elseif(is_array($data)){
+            $datos[] = $data;
+        }
+
+        header('Content-type: application/json');
+        echo json_encode( $datos );
+    }
 ?>
