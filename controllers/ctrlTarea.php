@@ -17,10 +17,14 @@
     if( $_POST['accion'] == 'guardar' ){
         $data = $objeto->guardar();
 
-        //$data = [ 'name' => 'God', 'age' => -1 ];
         header('Content-type: application/json');
         echo json_encode( $data );
+    }
 
-        //echo $respuesta;
+    if( $_POST['accion'] == 'todos' ){
+        $data = $objeto->consultarTodos();
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
     }
 ?>
