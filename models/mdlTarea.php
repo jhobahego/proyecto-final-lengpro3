@@ -49,18 +49,34 @@
 
     public function guardar(){
       $consulta = "INSERT INTO tarea(titulo,descripcion) VALUES('$this->titulo','$this->descripcion')";
-        $this->conexion = (CBaseDatos::get_instancia());
-        $this->conexion->conectar();
-  
-        if($this->conexion->get_link_id()){
-          if(mysqli_query($this->conexion->get_link_id(), $consulta)){
-            return ['status' => '200', 'message' => 'Guardado', 'icon' => 'success'];
-          } else {
-              return ['status' => '201', 'message' => 'Problemas con consulta', 'icon' => 'warning'];
-          }
-        }else {
-          return ['status' => '500', 'message' => 'problemas en la conexion', 'icon' => 'error'];
+      $this->conexion = (CBaseDatos::get_instancia());
+      $this->conexion->conectar();
+
+      if($this->conexion->get_link_id()){
+        if(mysqli_query($this->conexion->get_link_id(), $consulta)){
+          return ['status' => '200', 'message' => 'Guardado', 'icon' => 'success'];
+        } else {
+            return ['status' => '201', 'message' => 'Problemas con consulta', 'icon' => 'warning'];
         }
+      }else {
+        return ['status' => '500', 'message' => 'problemas en la conexion', 'icon' => 'error'];
+      }
+    }
+
+    public function consultarTodos(){
+      $consulta = "SELECT tarea_id, titulo, descripcion FROM tarea WHERE estado=0 ORDER BY titulo";
+      $this->conexion = (CBaseDatos::get_instancia());
+      $this->conexion->conectar();
+
+      $resultado = mysqli_query($this->conexion->get_link_id(), $consulta);
+
+      $datos = array();
+
+      while($fila = mysqli_fetch_assoc($resultado)){
+        $datos[] = $fila;
+      }
+      
+      return $datos;
     }
 
   }
