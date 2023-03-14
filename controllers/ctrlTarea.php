@@ -28,7 +28,7 @@
         echo json_encode( $data );
     }
 
-    if( $_POST['accion'] == 'consultar' and isset( $_POST['id']) ){
+    if( $_POST['accion'] == 'consultar' ){
         $data = $objeto->consultar($_POST['id']);
 
         $datos = array();
@@ -42,5 +42,12 @@
 
         header('Content-type: application/json');
         echo json_encode( $datos );
+    }
+
+    if( $_POST['accion'] == 'actualizar' ){
+        $data = $objeto->actualizar( $_POST['id']);
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
     }
 ?>
