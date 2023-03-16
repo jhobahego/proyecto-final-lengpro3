@@ -72,12 +72,13 @@
 
         success: function (msj) {
           $('#tabla').DataTable().clear();
-          for (var idx in msj){
+          for (var idx in msj) {
             $('#tabla').DataTable().row.add([msj[idx].tarea_id, msj[idx].titulo, msj[idx].descripcion,
-               '<button class="btn btn-info btn-sm" onclick="mostrar(' + msj[idx].tarea_id + ')" >Mostrar</button>' +
-                '<a class="btn btn-warning btn-sm" href="views/tareas/update.html?id=' + msj[idx].tarea_id + '" >Editar</a>' +
-                '<button class="btn btn-danger btn-sm" onclick="eliminar(' + msj[idx].tarea_id + ')" >Eliminar</button>']).draw();
-          } 
+              `<input type="checkbox" value="${msj[idx].estado}" class="form-check-input mx-4" onclick="tareaCompletada(${msj[idx].tarea_id})" >
+              <a class="btn btn-warning btn-sm" href="views/tareas/update.html?id=${msj[idx].tarea_id}" >Editar</a>
+              <button class="btn btn-danger btn-sm" onclick="eliminar(${msj[idx].tarea_id})" >Eliminar</button>`
+            ]).draw();
+          }
         },
 
         error: function (msj) {
@@ -86,10 +87,36 @@
             icon: msj['icon']
           })
         },
-        
       });
     }
-    
+
+    function tareaCompletada(id) {
+      $.ajax({
+        url: "controllers/ctrlTarea.php",
+        type: "POST",
+        dataType: "json",
+        data: "accion=finalizada&id=" + id,
+
+        success: function (msj) {
+          Swal.fire({
+            text: msj['message'],
+            icon: msj['icon']
+          }).then((result) => {
+            if(result.isConfirmed){
+              location.reload();
+            }
+          })
+        },
+
+        error: function (msj) {
+          Swal.fire({
+            text: msj['message'],
+            icon: msj['icon']
+          })
+        },
+      })
+    }
+
   </script>
 
 </body>
