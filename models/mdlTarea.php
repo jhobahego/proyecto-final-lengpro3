@@ -105,4 +105,20 @@
       }
     }
 
+    public function tareaCompletada($id){
+      $consulta = "UPDATE `tarea` SET estado=1 WHERE tarea_id=$id";
+      $this->conexion = (CBaseDatos::get_instancia());
+      $this->conexion->conectar();
+
+      if($this->conexion->get_link_id()){
+        if(mysqli_query($this->conexion->get_link_id(), $consulta)){
+          return ['status' => '200', 'message' => 'Tarea completada', 'icon' => 'success'];
+        } else {
+            return ['status' => '201', 'message' => 'Problemas con consulta de actualización', 'icon' => 'warning'];
+        }
+      }else {
+        return ['status' => '500', 'message' => 'problemas en la conexion al intentar actualizar estado de la tarea', 'icon' => 'error'];
+      }
+    }
+
   }
