@@ -96,6 +96,10 @@
             Swal.fire({
               text: msj['message'],
               icon: msj['icon']
+            }).then((result) => {
+              if(result.isConfirmed){
+                location.replace("views/tareas/index.html");
+              }
             })
           },
   
