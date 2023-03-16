@@ -50,4 +50,11 @@
         header('Content-type: application/json');
         echo json_encode( $data );
     }
+
+    if( $_POST['accion'] == 'finalizada' ){
+        $data = $objeto->tareaCompletada( $_POST['id']);
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
 ?>
