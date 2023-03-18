@@ -64,4 +64,11 @@
         header('Content-type: application/json');
         echo json_encode( $data );
     }
+
+    if( $_POST['accion'] == 'mostrar-estadisticas' ){
+        $data = $objeto->estadisticas();
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
 ?>
