@@ -9,6 +9,8 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <base href="http://localhost/ProyectoFinalLenPro3/">
+  <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 
   <title>Tareas</title>
 </head>
@@ -20,10 +22,15 @@
     </header>
     <main>
       <div class="container my-4">
-        <h1>Pagina de tareas</h1>
-        <p>Esta es una pagina de tareas creada como proyecto final del curso de lenguaje de programación 3 de la carrera
-          de ingeniería en sistemas.
-        </p>
+        <section style="margin-bottom: 50px; margin-top: 30px;">
+          <header><h1>Pagina de tareas</h1></header>
+          <p>Esta es una pagina de tareas creada como proyecto final del curso de lenguaje de programación 3 de la carrera
+            de ingeniería en sistemas.
+          </p>
+        </section>
+        <section>
+          <canvas class="mt-8" id="myChart" style="width:100%;max-width:600px"></canvas>
+        </section>
       </div>
     </main>
   </div>
@@ -36,10 +43,57 @@
     crossorigin="anonymous"></script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
+
   <script>
     $(document).ready(function () {
       $('.menuContainer').load('views/layouts/navbar.html');
+      mostrarGraficas();
     });
+    
+    function mostrarGraficas(){
+      $.ajax({
+        url: "controllers/ctrlTarea.php",
+        type: "POST",
+        dataType: "json",
+        data: "accion=mostrar-estadisticas",
+        
+        success: function(msj){
+          let xValues = ["total", "completadas", "incompletas"];
+          let yValues = [msj[0].tareas, msj[0].completadas, msj[0].incompletas];
+          let barColors = ["red", "green", "blue", "orange", "brown"];
+
+          new Chart("myChart", {
+            type: "bar",
+            data: {
+              labels: xValues,
+              datasets: [{
+                label: 'Cantidad de tareas',
+                backgroundColor: barColors,
+                data: yValues
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  min: 0
+                }
+              },
+            }
+          });
+        },
+
+        error: function(msj){
+          Swal.fire({
+            text: "Error al consultar las estadisticas",
+            icon: "error"
+          })
+        }
+      })
+  
+    }
   </script>
 
 </body>
