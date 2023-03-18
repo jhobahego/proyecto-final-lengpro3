@@ -117,6 +117,33 @@
       })
     }
 
+    function eliminar(id) {
+      $.ajax({
+        url: "controllers/ctrlTarea.php",
+        type: "POST",
+        dataType: "json",
+        data: "accion=eliminar&id=" + id,
+
+        success: function (msj) {
+          Swal.fire({
+            text: msj['message'],
+            icon: msj['icon']
+          }).then((result) => {
+            if(result.isConfirmed){
+              location.reload();
+            }
+          })
+        },
+
+        error: function (msj) {
+          Swal.fire({
+            text: msj['message'],
+            icon: msj['icon']
+          })
+        },
+      })
+    }
+
   </script>
 
 </body>
