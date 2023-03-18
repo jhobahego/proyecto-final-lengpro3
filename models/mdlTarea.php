@@ -137,4 +137,23 @@
       }
     }
 
+    public function estadisticas(){
+      $consulta = "SELECT COUNT(*) AS 'tareas',
+        SUM(CASE WHEN estado=1 THEN 1 ELSE 0 END) as 'completadas',
+        SUM(CASE WHEN estado=0 THEN 1 ELSE 0 END) as 'incompletas'
+        FROM tarea";
+      $this->conexion = (CBaseDatos::get_instancia());
+      $this->conexion->conectar();
+
+      $resultado = mysqli_query($this->conexion->get_link_id(), $consulta);
+
+      $datos = array();
+
+      while($fila = mysqli_fetch_assoc($resultado)){
+        $datos[] = $fila;
+      }
+      
+      return $datos;
+    }
+
   }
