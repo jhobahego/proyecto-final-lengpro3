@@ -121,4 +121,20 @@
       }
     }
 
+    public function eliminarTarea($id){
+      $consulta = "DELETE FROM `tarea` WHERE tarea_id=$id";
+      $this->conexion = (CBaseDatos::get_instancia());
+      $this->conexion->conectar();
+
+      if($this->conexion->get_link_id()){
+        if(mysqli_query($this->conexion->get_link_id(), $consulta)){
+          return ['status' => '200', 'message' => 'Tarea eliminada', 'icon' => 'success'];
+        } else {
+            return ['status' => '201', 'message' => 'Problemas al eliminar tarea', 'icon' => 'warning'];
+        }
+      }else {
+        return ['status' => '500', 'message' => 'problemas en la conexion al intentar eliminar la tarea', 'icon' => 'error'];
+      }
+    }
+
   }
