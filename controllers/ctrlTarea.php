@@ -57,4 +57,11 @@
         header('Content-type: application/json');
         echo json_encode( $data );
     }
+
+    if( $_POST['accion'] == 'eliminar' ){
+        $data = $objeto->eliminarTarea( $_POST['id']);
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
 ?>
