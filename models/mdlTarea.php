@@ -48,7 +48,7 @@
     }
 
     public function guardar(){
-      $consulta = "INSERT INTO tarea(titulo,descripcion) VALUES('$this->titulo','$this->descripcion')";
+      $consulta = "call sp_guardarTarea('$this->titulo', '$this->descripcion')";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
@@ -64,7 +64,7 @@
     }
 
     public function consultarTodos(){
-      $consulta = "SELECT tarea_id, titulo, descripcion FROM tarea WHERE estado=0 ORDER BY titulo";
+      $consulta = "call sp_consultarTarea(0)";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
@@ -80,7 +80,7 @@
     }
 
     public function consultar($id){
-      $consulta = "SELECT tarea_id, titulo, descripcion FROM tarea WHERE tarea_id=$id";
+      $consulta = "call sp_consultarTarea($id)";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
@@ -90,7 +90,8 @@
     }
 
     public function actualizar($id){
-      $consulta = "UPDATE tarea SET titulo='$this->titulo', descripcion='$this->descripcion' WHERE tarea_id=$id";
+      $consulta = "call sp_editarTarea('$this->titulo', '$this->descripcion',$id)";
+
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
@@ -106,7 +107,8 @@
     }
 
     public function tareaCompletada($id){
-      $consulta = "UPDATE `tarea` SET estado=1 WHERE tarea_id=$id";
+      // $consulta = "UPDATE `tarea` SET estado=1 WHERE tarea_id=$id";
+      $consulta = "call sp_completarTarea($id)";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
@@ -122,7 +124,7 @@
     }
 
     public function eliminarTarea($id){
-      $consulta = "DELETE FROM `tarea` WHERE tarea_id=$id";
+      $consulta = "call sp_eliminarTarea($id)";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
@@ -138,10 +140,7 @@
     }
 
     public function estadisticas(){
-      $consulta = "SELECT COUNT(*) AS 'tareas',
-        SUM(CASE WHEN estado=1 THEN 1 ELSE 0 END) as 'completadas',
-        SUM(CASE WHEN estado=0 THEN 1 ELSE 0 END) as 'incompletas'
-        FROM tarea";
+      $consulta = "call sp_consultarEstadisticas()";
       $this->conexion = (CBaseDatos::get_instancia());
       $this->conexion->conectar();
 
